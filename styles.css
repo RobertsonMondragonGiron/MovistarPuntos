@@ -1,0 +1,126 @@
+/* Estilos generales del body */
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #4CAF50, #8BC34A); /* Degradado verde */
+    display: flex;
+    flex-direction: column; /* Coloca los elementos en una columna */
+    justify-content: center; /* Centra el contenedor verticalmente */
+    align-items: center; /* Centra el contenedor horizontalmente */
+    height: 100vh; /* Ocupa toda la altura de la ventana */
+    margin: 0;
+}
+
+/* Contenedor principal */
+.container {
+    background-color: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Sombra suave alrededor del cuadro */
+    width: 100%; /* Hace que el contenedor ocupe el 100% del ancho disponible */
+    max-width: 350px; /* Limita el ancho máximo del contenedor */
+    border: 2px solid #4CAF50; /* Borde verde alrededor del contenedor */
+    transition: transform 0.3s ease-in-out; /* Transición suave cuando el mouse pasa sobre el contenedor */
+    margin-top: 50px; /* Añade espacio superior */
+}
+
+/* Estilo del título */
+h1 {
+    text-align: center;
+    color: #4CAF50;
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil al título */
+}
+
+/* Estilos de los inputs y los labels */
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    transition: border 0.3s ease-in-out;
+}
+
+.input-group input:focus {
+    border-color: #4CAF50;
+    outline: none; /* Elimina el contorno por defecto cuando el input está enfocado */
+}
+
+/* Estilo de los botones */
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Estilo de los mensajes de error */
+.error {
+    color: red;
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Estilo de los enlaces */
+a {
+    text-decoration: none;
+    color: #4CAF50;
+    text-align: center;
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #2E8B57; /* Cambio de color al pasar el mouse sobre el enlace */
+}
+
+/* Estilo para la cabecera */
+header {
+    width: 100%;
+    text-align: center; /* Centra los elementos de la cabecera */
+    margin-bottom: 20px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center; /* Centra los botones */
+    gap: 15px; /* Espacio entre los botones */
+}
+
+/* Estilo para el pie de página */
+footer {
+    text-align: center;
+    color: white;
+    font-size: 14px;
+    padding: 10px;
+    background-color: #333;
+    margin-top: 20px; /* Espacio encima del pie */
+}
+
+footer p {
+    margin: 5px 0;
+}

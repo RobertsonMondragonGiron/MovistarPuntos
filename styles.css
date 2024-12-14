@@ -1,7 +1,7 @@
 /* Estilos generales del body */
 body {
     font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #4CAF50, #8BC34A); /* Degradado verde */
+    background-color: #4CAF50; /* Fondo sólido de color verde */
     display: flex;
     flex-direction: column; /* Coloca los elementos en una columna */
     justify-content: center; /* Centra el contenedor verticalmente */
@@ -9,6 +9,7 @@ body {
     height: 100vh; /* Ocupa toda la altura de la ventana */
     margin: 0;
 }
+
 
 /* Contenedor principal */
 .container {

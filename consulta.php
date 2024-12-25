@@ -1,46 +1,50 @@
 <?php
-session_start(); // Iniciar la sesión para verificar si el usuario está logueado
+session_start();
 
-// Verificar si el usuario ha iniciado sesión
+// Verificar si el usuario está logueado
 if (!isset($_SESSION['correo'])) {
-    header("Location: index.php"); // Redirigir al login si no ha iniciado sesión
+    echo "Inicia sesión para acceder a los resultados.";
     exit();
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consultar Visitas</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Asegúrate de incluir tu archivo de estilos -->
+    <title>Consultar Resultados de Visitas</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container dashboard-container">
-        <!-- Cabecera de la página con los botones -->
-        <header>
-            <h1>Consultar Visitas</h1>
-            <div class="button-container">
-                
+        <h1>Consultar Resultados de Visitas</h1>
+        <div class="button-container">
             <a href="dashboard.php"><button>Registrar</button></a>
-        <a href="modificar.php"><button>Modificar</button></a>
-        <a href="logout.php"><button>Cerrar sesión</button></a>
+            <a href="Modificar.php"><button>Modificar</button></a>
+            <a href="logout.php"><button>Cerrar sesión</button></a>
+        </div>
+        <br>
+        <div class="form-container">
+    <div class="form-group">
+        <label for="fecha_inicio">Fecha de inicio:</label>
+        
+            <input type="date" name="fecha_inicio" required>
+        
     </div>
-        </header>
+    <div class="form-group">
+        <label for="fecha_fin">Fecha de fin:</label>
         
-        <!-- Formulario para seleccionar las fechas -->
-        <form method="POST" action="resultados.php">
-            <div class="input-group">
-                <label for="fecha_inicio">Fecha de inicio:</label>
-                <input type="date" id="fecha_inicio" name="fecha_inicio" required>
-            </div>
-            <div class="input-group">
-                <label for="fecha_fin">Fecha de fin:</label>
-                <input type="date" id="fecha_fin" name="fecha_fin" required>
-            </div>
-            <button type="submit">Resultados</button>
-        </form>
+            <input type="date" name="fecha_fin" required>
         
+    </div>
+    <br>
+    <div class="form-group">
+        <button type="submit">Consultar</button>
+    </div>
+</div>
+
 </body>
 </html>
+
 

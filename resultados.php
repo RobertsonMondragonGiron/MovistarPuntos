@@ -1,13 +1,20 @@
 <?php
-// Conectar a la base de datos
+session_start();
 include('db.php');
 
-// Inicializar variables
+// Verificar si el usuario está logueado
+if (!isset($_SESSION['correo'])) {
+    echo "Inicia sesión para acceder a los resultados.";
+    exit();
+}
+
+// Procesar formulario y consultar registros
 $fecha_inicio = $_POST['fecha_inicio'] ?? '';
 $fecha_fin = $_POST['fecha_fin'] ?? '';
 $registros = [];
+$suma_total = 0;
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($fecha_inicio) && !empty($fecha_fin)) {
     $query = "SELECT * FROM visitas WHERE correo_id = ? AND fecha BETWEEN ? AND ? ORDER BY fecha DESC";
     $stmt = $conn->prepare($query);
 
@@ -16,49 +23,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->execute();
         $result = $stmt->get_result();
 
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $registros[] = $row;
-            }
+        while ($row = $result->fetch_assoc()) {
+            $registros[] = $row;
+            $suma_total += $row['total']; // Sumar el valor del campo "total" de cada registro
         }
     } else {
         echo "Error al preparar la consulta: " . $conn->error;
     }
 }
-
-// Generar y descargar el archivo CSV
-if (!empty($registros)) {
-    // Configurar encabezados para descarga
-    header('Content-Type: text/csv; charset=utf-8');
-    header('Content-Disposition: attachment; filename="resultados_visitas.csv"');
-
-    // Abrir flujo de salida
-    $output = fopen('php://output', 'w');
-
-    // Agregar encabezados al CSV
-    fputcsv($output, ['Fecha', 'Visita 1', 'Visita 2', 'Visita 3', 'Visita 4', 'Visita 5', 'Total']);
-
-    // Agregar filas de datos
-    foreach ($registros as $registro) {
-        fputcsv($output, [
-            $registro['fecha'],
-            $registro['visita1'],
-            $registro['visita2'],
-            $registro['visita3'],
-            $registro['visita4'],
-            $registro['visita5'],
-            $registro['total']
-        ]);
-    }
-
-    // Cerrar flujo
-    fclose($output);
-    exit();
-} else {
-    echo "No hay datos para exportar.";
-}
 ?>
-
 
 <!DOCTYPE html>
 <html lang="es">
@@ -69,11 +42,16 @@ if (!empty($registros)) {
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="dashboard-container">
+    <div class="container dashboard-container">
         <h1>Resultados de Visitas</h1>
-        
+        <div class="button-container">
+            <a href="dashboard.php"><button>Registrar</button></a>
+            <a href="consulta.php"><button>Consultar</button></a>
+            <a href="Modificar.php"><button>Modificar</button></a>
+            <a href="logout.php"><button>Cerrar sesión</button></a>
+        </div>
+
         <?php if (!empty($registros)): ?>
-            <h2>Resultados</h2>
             <table>
                 <thead>
                     <tr>
@@ -89,30 +67,26 @@ if (!empty($registros)) {
                 <tbody>
                     <?php foreach ($registros as $registro): ?>
                         <tr>
-                            <td><?= $registro['fecha'] ?></td>
-                            <td><?= $registro['visita1'] ?></td>
-                            <td><?= $registro['visita2'] ?></td>
-                            <td><?= $registro['visita3'] ?></td>
-                            <td><?= $registro['visita4'] ?></td>
-                            <td><?= $registro['visita5'] ?></td>
-                            <td><?= $registro['total'] ?></td>
+                            <td><?= htmlspecialchars($registro['fecha']) ?></td>
+                            <td><?= htmlspecialchars($registro['visita1']) ?></td>
+                            <td><?= htmlspecialchars($registro['visita2']) ?></td>
+                            <td><?= htmlspecialchars($registro['visita3']) ?></td>
+                            <td><?= htmlspecialchars($registro['visita4']) ?></td>
+                            <td><?= htmlspecialchars($registro['visita5']) ?></td>
+                            <td><?= htmlspecialchars($registro['total']) ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="6" style="text-align: right; font-weight: bold;">Total General:</td>
+                        <td style="font-weight: bold;"><?= htmlspecialchars($suma_total) ?></td>
+                    </tr>
+                </tfoot>
             </table>
         <?php elseif ($_SERVER["REQUEST_METHOD"] == "POST"): ?>
             <p>No se encontraron registros para el rango de fechas seleccionado.</p>
         <?php endif; ?>
-
-        <form method="POST">
-    <button type="submit" name="exportar_excel">Exportar a Excel</button>
-</form>
-        <a href="dashboard.php"><button>Registrar</button></a>
-        <a href="consulta.php"><button>Consultar</button></a>
-        <a href="Modificar.php"><button>Modificar</button></a>
-        <a href="logout.php"><button>Cerrar sesión</button></a>
     </div>
 </body>
 </html>
-
-

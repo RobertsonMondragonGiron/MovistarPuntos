@@ -1,79 +1,90 @@
 /* Estilos generales del body */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #4CAF50; /* Fondo sólido de color verde */
+    font-family: 'Arial', sans-serif;
+    background-color: #4CAF50;
     display: flex;
-    flex-direction: column; /* Coloca los elementos en una columna */
-    justify-content: center; /* Centra el contenedor verticalmente */
-    align-items: center; /* Centra el contenedor horizontalmente */
-    height: 100vh; /* Ocupa toda la altura de la ventana */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
     margin: 0;
 }
-
 
 /* Contenedor principal */
 .container {
     background-color: white;
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Sombra suave alrededor del cuadro */
-    width: 100%; /* Hace que el contenedor ocupe el 100% del ancho disponible */
-    max-width: 350px; /* Limita el ancho máximo del contenedor */
-    border: 2px solid #4CAF50; /* Borde verde alrededor del contenedor */
-    transition: transform 0.3s ease-in-out; /* Transición suave cuando el mouse pasa sobre el contenedor */
-    margin-top: 50px; /* Añade espacio superior */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    border: 1px solid #4CAF50;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-top: 20px;
+}
+
+.container:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
 /* Estilo del título */
 h1 {
     text-align: center;
     color: #4CAF50;
-    font-size: 28px;
-    font-weight: 600;
+    font-size: 26px;
+    font-weight: bold;
     margin-bottom: 20px;
-    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil al título */
+    text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.2);
 }
 
 /* Estilos de los inputs y los labels */
 .input-group {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .input-group label {
     display: block;
-    margin-bottom: 8px;
-    color: #333;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #444;
 }
 
 .input-group input {
     width: 100%;
-    padding: 12px;
+    padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 8px;
-    transition: border 0.3s ease-in-out;
+    border-radius: 5px;
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .input-group input:focus {
     border-color: #4CAF50;
-    outline: none; /* Elimina el contorno por defecto cuando el input está enfocado */
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+    outline: none;
 }
 
 /* Estilo de los botones */
 button {
     width: 100%;
-    padding: 12px;
+    padding: 10px;
     background-color: #4CAF50;
     color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
     font-weight: bold;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
 button:hover {
     background-color: #45a049;
+    transform: scale(1.03);
+}
+
+button:active {
+    transform: scale(0.98);
 }
 
 /* Estilo de los mensajes de error */
@@ -96,20 +107,27 @@ a {
 }
 
 a:hover {
-    color: #2E8B57; /* Cambio de color al pasar el mouse sobre el enlace */
+    color: #2E8B57;
 }
 
 /* Estilo para la cabecera */
 header {
     width: 100%;
-    text-align: center; /* Centra los elementos de la cabecera */
+    text-align: center;
     margin-bottom: 20px;
 }
 
+/* Contenedor de botones */
 .button-container {
     display: flex;
-    justify-content: center; /* Centra los botones */
-    gap: 15px; /* Espacio entre los botones */
+    justify-content: center;
+    gap: 10px;
+}
+
+.button-container button {
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 5px;
 }
 
 /* Estilo para el pie de página */
@@ -119,9 +137,10 @@ footer {
     font-size: 14px;
     padding: 10px;
     background-color: #333;
-    margin-top: 20px; /* Espacio encima del pie */
+    margin-top: 20px;
 }
 
 footer p {
     margin: 5px 0;
 }
+
